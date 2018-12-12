@@ -14,13 +14,18 @@ var listenerAdded = false;
 var scene = document.querySelector('a-scene');  
 var playOnce = false; 
 
+var setVisible = false;
+
 
 
 AFRAME.registerComponent('markerobject', {
     tick: function () {
 	
 		const bot = document.querySelector('#TreeModel'); 		
-		var scene = document.querySelector('a-scene');
+		var scene = document.querySelector('a-scene');		
+		var button = document.querySelector('#nextButton'); 		
+		
+		
          if (document.querySelector('a-marker').object3D.visible == true) {		
 			if(!playOnce) {			
 				bot.setAttribute("animation-mixer",startAnimTree); 
@@ -28,15 +33,22 @@ AFRAME.registerComponent('markerobject', {
 				
 				var startTrans = function () {
 					scene.removeEventListener('animation-finished',startTrans); 
-					bot.setAttribute("animation-mixer",loopAnimTree);
+					bot.setAttribute("animation-mixer",loopAnimTree);					
+					button.style.visibility = "visible";
+					setVisible = true;
 				};  
 				
+
 				scene.addEventListener('animation-finished',startTrans);				
-			}
-			
+			} else {			
+				if(setVisible){
+					button.style.visibility = "visible";				
+				}
+			}		   
         } 
-		else {
-		
+		else {						
+					
+			button.style.visibility = "hidden";
         }
 		
 		
@@ -44,6 +56,9 @@ AFRAME.registerComponent('markerobject', {
   //<div id="scene" class = "box" style="height: 100%; width: 100%;position:absolute;"  >   
      }
 });
+
+
+
 </script>
 
   <body style='margin : 0px; overflow: hidden;'>
@@ -59,7 +74,7 @@ AFRAME.registerComponent('markerobject', {
 		
 		<a-entity camera></a-entity>
 	</a-scene>		
-		<button class = "boton" type="button" style="z-index: 5; position:relative ; top:50%; left:50%;" >Click Me!</button>	  
+		<button id="nextButton" type="button" style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
 
   </body>
   
