@@ -38,25 +38,29 @@ AFRAME.registerComponent('markerobject', {
 		else {
 		
         }
+		
+		
 
+  //<div id="scene" class = "box" style="height: 100%; width: 100%;position:absolute;"  >   
      }
 });
 </script>
 
   <body style='margin : 0px; overflow: hidden;'>
-    <a-scene sceneobject embedded arjs='trackingMethod: best;debugUIEnabled:false;  patternRatio:0.90'>	
-	
+	<a-scene sceneobject embedded arjs='trackingMethod: best;debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 80%; width: 80%; margin: 0 auto; ">	
+		
 		<a-assets>
 			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>
 		</a-assets>
 
-     <a-marker markerobject preset='custom' type='pattern' url='./elevenmarker.patt'>	
-		<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer></a-entity>
+		<a-marker markerobject preset='custom' type='pattern' url='./elevenmarker.patt'>	
+			<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer></a-entity>	
+		</a-marker> 
 		
-      </a-marker> 
-	
-	<a-entity camera></a-entity>
-    </a-scene>
+		<a-entity camera></a-entity>
+	</a-scene>		
+		<button class = "boton" type="button" style="z-index: 5; position:relative ; top:50%; left:50%;" >Click Me!</button>	  
+
   </body>
   
 </html>
