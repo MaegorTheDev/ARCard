@@ -21,7 +21,7 @@ AFRAME.registerComponent('markerobject', {
 	
 		const bot = document.querySelector('#TreeModel'); 		
 		var scene = document.querySelector('a-scene');		
-		var button = document.querySelector('#nextButton'); 		
+		var button = document.querySelector('#nextButton'); 						
 		
 		
          if (document.querySelector('a-marker').object3D.visible == true) {		
@@ -32,21 +32,22 @@ AFRAME.registerComponent('markerobject', {
 				var startTrans = function () {
 					scene.removeEventListener('animation-finished',startTrans); 
 					bot.setAttribute("animation-mixer",loopAnimTree);					
-					button.style.visibility = "visible";
+					//button.style.visibility = "visible";
+					//Next();
 					setVisible = true;
 				};  
 				
 
-				scene.addEventListener('animation-finished',startTrans);				
+				//scene.addEventListener('animation-finished',startTrans);				
 			} else {			
 				if(setVisible){
-					button.style.visibility = "visible";				
+					//button.style.visibility = "visible";				
 				}
 			}		   
         } 
 		else {						
 					
-			button.style.visibility = "hidden";
+			//button.style.visibility = "hidden";
         }
 		
 		
@@ -55,30 +56,60 @@ AFRAME.registerComponent('markerobject', {
      }
 });
 
+var startedCards = 0;
+var currentTrack = 0;
+var tracks = 14;
+
 function Next(){
-
-	console.log
+	const cards = document.querySelector('#CardsModel'); 			
+	var scene = document.querySelector('a-scene');		
+	
+	if(currentTrack < tracks){		
+		currentTrack = currentTrack + 1;
+		var value = "clip: Take 00"+ currentTrack +"; timeScale: 1;";	
+		//startedCards = 1;		
+		cards.setAttribute("animation-mixer",value);			
+		
+		var nextAnim = function () {
+				
+				console.log("Next anim");
+					scene.removeEventListener('animation-loop',startTrans); 
+					bot.setAttribute("animation-mixer","timeScale: 0;");	
+					Next();
+				};  
+				
+		if(currentTrack == 1){
+			scene.addEventListener('animation-loop',nextAnim);			
+		}	
+	}
 }
-
+//
+//		<button id="nextButton" type="button" onclick="Next()"  
+//		style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
 
 
 </script>
 
   <body style='margin : 0px; overflow: hidden;'>
-	<a-scene sceneobject embedded arjs='trackingMethod: best; debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 80%; width: 80%; margin: 0 auto; ">	
+	<a-scene sceneobject embedded arjs='trackingMethod: best; debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 100%; width: 100%; margin: 0 auto; " vr-mode-ui="enabled: false">	
 		<a-light type="ambient" color="#87CEEB" intensity = "2.5"></a-light>
 		<a-assets>
-			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>
+			<a-asset-item id="Tree" src="./Tree2.glb"></a-asset-item>
 		</a-assets>
+		
+		<a-assets>
+			<a-asset-item id="Cards" src="./Cards.glb"></a-asset-item>
+		</a-assets>
+
 
 		<a-marker markerobject preset='custom' type='pattern' url='./elevenmarker.patt'>	
 			<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer></a-entity>	
+			<a-entity id="CardsModel" gltf-model="#Cards" position = " 0 0 .25 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer = "clip: Take001; timeScale:0;"></a-entity>	
+	
 		</a-marker> 
 		
 		<a-entity camera></a-entity>
 	</a-scene>		
-		<button id="nextButton" type="button" onclick="Next()"  
-		style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
 
   </body>
   
