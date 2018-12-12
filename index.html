@@ -55,12 +55,17 @@ AFRAME.registerComponent('markerobject', {
      }
 });
 
+function Next(){
+
+	console.log
+}
+
 
 
 </script>
 
   <body style='margin : 0px; overflow: hidden;'>
-	<a-scene sceneobject embedded arjs='debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 80%; width: 80%; margin: 0 auto; ">	
+	<a-scene sceneobject embedded arjs='trackingMethod: best; debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 80%; width: 80%; margin: 0 auto; ">	
 		<a-light type="ambient" color="#87CEEB" intensity = "2.5"></a-light>
 		<a-assets>
 			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>
@@ -72,7 +77,7 @@ AFRAME.registerComponent('markerobject', {
 		
 		<a-entity camera></a-entity>
 	</a-scene>		
-		<button id="nextButton" type="button"  
+		<button id="nextButton" type="button" onclick="Next()"  
 		style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
 
   </body>
