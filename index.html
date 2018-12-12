@@ -3,9 +3,7 @@
 <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
 <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"> </script>  
-<script> 
-
-    
+<script>   
 
     
 var startAnimTree = "clip: Take 001; loop: once; crossFadeDuration: 0;";;	
@@ -62,7 +60,7 @@ AFRAME.registerComponent('markerobject', {
 </script>
 
   <body style='margin : 0px; overflow: hidden;'>
-	<a-scene sceneobject embedded arjs='trackingMethod: best;debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 80%; width: 80%; margin: 0 auto; ">	
+	<a-scene sceneobject embedded  best;debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 80%; width: 80%; margin: 0 auto; ">	
 		
 		<a-assets>
 			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>
@@ -74,7 +72,8 @@ AFRAME.registerComponent('markerobject', {
 		
 		<a-entity camera></a-entity>
 	</a-scene>		
-		<button id="nextButton" type="button" style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
+		<button id="nextButton" type="button" onclick="myFunction()"
+		style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
 
   </body>
   
