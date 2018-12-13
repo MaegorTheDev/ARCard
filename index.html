@@ -21,12 +21,13 @@ AFRAME.registerComponent('markerobject', {
 	
 		const bot = document.querySelector('#TreeModel'); 		
 		var scene = document.querySelector('a-scene');	
+		var sound = document.querySelector('#openSound');	
 		
          if (document.querySelector('a-marker').object3D.visible == true) {		
 			if(!playOnce) {			
 				bot.setAttribute("animation-mixer",startAnimTree); 
-				playOnce = true;
-				
+				playOnce = true;				
+				setTimeout(sound.components.sound.playSound,5000);
 				var startTrans = function () {
 					scene.removeEventListener('animation-finished',startTrans); 
 					bot.setAttribute("animation-mixer",loopAnimTree);		
@@ -50,20 +51,15 @@ function StartCards(){
 	
 	var value = "clip: Take 001; timeScale: 1; loop: once;";	
 		//startedCards = 1;		
-		cards.setAttribute("animation-mixer",value);			
-		
-		var nextAnim = function () {				
-					scene.removeEventListener('animation-finished',nextAnim); 
-					bot.setAttribute("animation-mixer","timeScale: 0;");	
-				};  
-				
-		scene.addEventListener('animation-finished',nextAnim);			
-		
-	
+		cards.setAttribute("animation-mixer",value);
 }
 //
 //		<button id="nextButton" type="button" onclick="Next()"  
 //		style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
+
+//		<a-entity id="music"  sound="src:#bg; autoplay: true; loop:true; volume:0.25;"></a-entity>
+//
+//			<audio id="bg" src="./music.mp3" preload="auto" ></audio>		
 
 
 </script>
@@ -73,17 +69,19 @@ function StartCards(){
 		<a-light type="ambient" color="#87CEEB" intensity = "2.5"></a-light>
 		<a-assets>
 			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>
+			<a-asset-item id="Cards" src="./Cards.glb"></a-asset-item>				
+			<a-asset-item id="Open" src="./open.mp3" response-type="arraybuffer"></a-asset-item>	
+			<a-asset-item id="Music" src="./music.mp3" response-type="arraybuffer"></a-asset-item>			
 		</a-assets>
 		
-		<a-assets>
-			<a-asset-item id="Cards" src="./Cards.glb"></a-asset-item>
-		</a-assets>
-
-
+		<a-entity id="music"  sound="src:#Music; autoplay: true; loop:true; volume:0.5;"></a-entity>	
+		<a-entity id="openSound" sound="src:#Open; autoplay:false; loop:false; volume:5;"></a-entity>			
+		
 		<a-marker markerobject preset='custom' type='pattern' url='./elevenmarker.patt'>	
-			<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer></a-entity>	
+			
+			<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer ></a-entity>	
 			<a-entity id="CardsModel" gltf-model="#Cards" position = " 0 0 .25 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer = "clip: Take001; timeScale:0;"></a-entity>	
-			<a-entity  position = " 0 0 5 "  particle-system="preset: snow; particleCount:6500; maxAge:12;"></a-entity>
+			<a-entity  position = " 0 0 5 "  particle-system="preset: snow; particleCount:6500; maxAge:8;size:1.5;"></a-entity>
 		</a-marker> 
 		
 		<a-entity camera></a-entity>
