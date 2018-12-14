@@ -37,10 +37,11 @@ AFRAME.registerComponent('markerobject', {
 				scene.addEventListener('animation-finished',startTrans);
 
 				//Show Cards
-				StartCards();
+				//StartCards();
+				
+				HiddenImage();
 			} 	   
         } 
-		
   //<div id="scene" class = "box" style="height: 100%; width: 100%;position:absolute;"  >   
      }
 });
@@ -53,40 +54,44 @@ function StartCards(){
 		//startedCards = 1;		
 		cards.setAttribute("animation-mixer",value);
 }
-//
-//		<button id="nextButton" type="button" onclick="Next()"  
-//		style="z-index: 5; position:relative ; top:50%; left:38%;width: 25%; visibility: hidden;" >Siguiente</button>	  
 
-//		<a-entity id="music"  sound="src:#bg; autoplay: true; loop:true; volume:0.25;"></a-entity>
-//
-//			<audio id="bg" src="./music.mp3" preload="auto" ></audio>		
+function HiddenImage() {
+    var img = document.getElementById('instructions');
+    img.style.visibility = 'hidden';
+}
+
+
+//	
 
 
 </script>
 
-  <body style='margin : 0px; overflow: hidden;'>
-	<a-scene sceneobject embedded arjs='trackingMethod: best; debugUIEnabled:false;  patternRatio:0.90' style="position:relative ;	height: 100%; width: 100%; margin: 0 auto; " vr-mode-ui="enabled: false">	
+  <body style='margin : 0px; overflow: hidden;'>  
+  <div id="box" style='height: 100%; width: 100%; margin: 0 auto;'>
+ 
+	<img id="instructions" src="./instruction.png" style='height:30%; width:auto;
+     position: absolute;   margin-left: auto; margin-right: auto; top: 75%; left: 50%; transform: translate(-50%, -50%);' >
+	<a-scene sceneobject embedded arjs='trackingMethod: best; debugUIEnabled:false;  patternRatio:0.90';height: 100%; width: 100%; margin: 0 auto; " vr-mode-ui="enabled: false">	
 		<a-light type="ambient" color="#87CEEB" intensity = "2.5"></a-light>
 		<a-assets>
-			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>
-			<a-asset-item id="Cards" src="./Cards.glb"></a-asset-item>				
+			<a-asset-item id="Tree" src="./Tree.glb"></a-asset-item>			
+			<a-asset-item id="Cards" src="./Cards.glb"></a-asset-item>
 			<a-asset-item id="Open" src="./open.mp3" response-type="arraybuffer"></a-asset-item>	
 			<a-asset-item id="Music" src="./music.mp3" response-type="arraybuffer"></a-asset-item>			
 		</a-assets>
 		
-		<a-entity id="music"  sound="src:#Music; autoplay: true; loop:true; volume:0.5;"></a-entity>	
-		<a-entity id="openSound" sound="src:#Open; autoplay:false; loop:false; volume:5;"></a-entity>			
+		<a-entity id="music"  sound="src:#Music; autoplay: true; loop:true; volume:0;"></a-entity>	
+		<a-entity id="openSound" sound="src:#Open; autoplay:false; loop:false; volume:5;"></a-entity>		
 		
 		<a-marker markerobject preset='custom' type='pattern' url='./elevenmarker.patt'>	
-			
-			<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer ></a-entity>	
 			<a-entity id="CardsModel" gltf-model="#Cards" position = " 0 0 .25 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer = "clip: Take001; timeScale:0;"></a-entity>	
-			<a-entity  position = " 0 0 5 "  particle-system="preset: snow; particleCount:6500; maxAge:8;size:1.5;"></a-entity>
+			<a-entity id="TreeModel" gltf-model="#Tree" position = " 0 0 .5 " rotation = " 270 0 0" scale = " 2.5 2.5 2.5" animation-mixer ></a-entity>	
+			<a-entity  position = " 0 0 5 "  particle-system="preset: snow; particleCount:5000; size:1.5;"></a-entity>
 		</a-marker> 
 		
 		<a-entity camera></a-entity>
 	</a-scene>		
-
+	</div>	
   </body>
   
 </html>
